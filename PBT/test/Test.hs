@@ -8,4 +8,5 @@ main = do
   defaultMain (testGroup "All Tests"
                 [ testGroup "Sort" Test.Sort.props
                 , testGroup "Unit" Test.Unit.unitTests
+                , testGroup "Prop" Test.Prop.propTests 
                 ])

@@ -25,8 +25,20 @@ source-repository head
 
 library
   exposed-modules:
+      Cont.Main
+      Cont.MyCont
+      Expr
+      HW.Compiler
+      HW.Eval
+      HW.Main
+      HW.StackMachine
       List
       Sort
+      State.ConservativeRenamer
+      State.Main
+      State.MyState
+      State.Renamer
+      Util
   other-modules:
       Paths_PBT
   autogen-modules:
@@ -36,6 +48,7 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       base >=4.7 && <5
+    , containers
   default-language: Haskell2010
 
 executable PBT-exe
@@ -50,6 +63,7 @@ executable PBT-exe
   build-depends:
       PBT
     , base >=4.7 && <5
+    , containers
   default-language: Haskell2010
 
 test-suite PBT-test
@@ -57,6 +71,7 @@ test-suite PBT-test
   main-is: Test.hs
   other-modules:
       Test.List
+      Test.Prop
       Test.Sort
       Test.Unit
       Paths_PBT
@@ -68,6 +83,7 @@ test-suite PBT-test
   build-depends:
       PBT
     , base >=4.7 && <5
+    , containers
     , hedgehog
     , tasty
     , tasty-hedgehog
