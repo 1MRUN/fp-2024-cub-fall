@@ -3,8 +3,6 @@ import Game
 import Graphics.Gloss.Interface.Pure.Game
 import Data.Array
 
-playerTurn :: Game -> (Int, Int) -> Game
-
 isWithinBounds :: (Int, Int) -> Int -> Bool
 isWithinBounds (x, y) n = x >= 0 && x < n && y >= 0 && y < n
 
@@ -26,16 +24,13 @@ isDirectionValid game (x, y) (dx, dy) =
     in any (== playerCell) validCells && safeAccess board (n game) (x + dx, y + dy) == oppositeCell
 
 isPlaceValid :: Game -> (Int, Int) -> Bool
-
 isPlaceValid game pos = any (isDirectionValid game pos) directions
 
 lengthDirection :: Game -> Player -> (Int, Int) -> (Int, Int) -> Int
-
 lengthDirection game player (x, y) (dx, dy) = length $ takeWhile (\f -> f == Just (player)) $ map (\k -> safeAccess board (n game) (x + k * dx, y + k * dy)) [1..(n game)]
     where board = gameBoard game
 
 flipCells :: Game -> (Int, Int) -> Game
-
 flipCells game (x, y)
     | isPlaceValid game (x, y) && isWithinBounds (x, y) (n game) = game {gameBoard = newBoard}
     | otherwise = game
@@ -67,6 +62,7 @@ checkEnding game = case ((length $ filter (== Nothing) $ elems $ gameBoard game)
             | otherwise = Nothing
             where lengthDif = length (filter (== Just Player1) $ elems $ gameBoard game) - length (filter (== Just Player2) $ elems $ gameBoard game)
 
+playerTurn :: Game -> (Int, Int) -> Game
 playerTurn game (x, y)
     | isWithinBounds(x, y) (n game) && isPlaceValid game (x, y) && board ! (x, y) == Nothing = 
         
